@@ -12,7 +12,7 @@ from models.user import User
 class SessionAuth(Auth):
     """
     Class for Session auth clas
-    s"""
+    """
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
