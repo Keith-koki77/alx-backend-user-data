@@ -7,11 +7,11 @@ from api.v1.auth.auth import Auth
 from typing import TypeVar
 from uuid import uuid4
 from models.user import User
-
+from flask import request
 
 class SessionAuth(Auth):
     """
-    Class for Session auth clas
+    Class for Session auth class
     """
     user_id_by_session_id = {}
 
@@ -32,6 +32,12 @@ class SessionAuth(Auth):
         if not session_id or type(session_id) != str:
             return
         return SessionAuth.user_id_by_session_id.get(session_id, None)
+
+    def session_cookie(self, request) -> str:
+        """
+        Extracts the session cookie from the request
+        """
+        return request.cookies.get("session_id")
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
